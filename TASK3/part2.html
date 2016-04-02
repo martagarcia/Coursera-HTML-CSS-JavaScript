@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+    <head>
+        <style>
+            img {
+                position:absolute
+            }
+
+            div {
+                position:absolute; 
+                width:500px; 
+                height:500px
+            }
+
+            #rightSide { 
+                left: 500px;
+                border-left: 1px solid black 
+            }
+       </style>
+    </head>
+    <body id="theBody" onload="generateFaces()">
+        <h1>Matching Game</h1>
+        <p>Click on the extra smiling face on the left.</p>
+
+        <div id="leftSide"></div> 
+        <div id="rightSide" class="rightSide" ></div> 
+        <script>
+            var numberOfFaces = 5;
+            var theLeftSide = document.getElementById("leftSide");
+
+
+
+            function generateRandomNumber(limit) {
+                var random_number = Math.random() * limit;
+                return Math.floor(random_number);
+            }
+
+            function generateFaces() {
+                var limit_width = 400, limit_height = 400;
+                var top_position = 0, left_position = 0; 
+                var random_numberOfFaces = generateRandomNumber(numberOfFaces);
+                var count = 0;
+
+                while( count < numberOfFaces) {
+
+                    // Random positions are created
+                    top_position  = generateRandomNumber(limit_width); 
+                    left_position = generateRandomNumber(limit_height);
+
+                    // An img is created
+                    var img = document.createElement("img");
+
+                    // The img src attribute is set
+                    img.src="http://home.cse.ust.hk/~rossiter/mooc/matching_game/smile.png";
+                    img.style.top = top_position + "px";
+                    img.style.left = left_position + "px";
+
+                    theLeftSide.appendChild(img);
+
+                    count++;
+
+
+                }
+
+            }
+
+
+        </script>
+    </body>
+</html>

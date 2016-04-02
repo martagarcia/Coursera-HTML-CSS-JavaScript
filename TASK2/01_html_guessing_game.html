@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+    <title>JavaScript Guessing Game</title>
+</head>
+    <body onload="do_game()">
+        <script>      
+			var guess_input_text;   
+			var guess_input;   
+			var target;    
+			var finished = false;   
+			var guesses = 0;
+			var colors = new Array(10);
+			colors=["blue", "cyan", "gold", "gray", "green", "magenta", "orange", "red", "white", "yellow"];
+
+			function do_game() {
+				// Generate a random color
+			    var random_number = Math.random() * (colors.length);
+			    var target_index = Math.floor(random_number);
+			    target = colors[target_index];
+
+			    // Game loop
+			    while (!finished) {
+			        guess_input_text = prompt("I am thinking of one of these colors: " 
+			                                + "\n\n" + colors.join(", ") + "\n\n What color am I thinking of?");
+			        guess_input = guess_input_text;
+			        guesses += 1;   
+			        finished = check_guess();
+			    }
+			    alert( "The color was: " + target);
+			}
+
+  			function isInArray(value, array) {
+    			var count=array.length;
+    			for(var i=0;i<count;i++){
+        			if(array[i]===value){
+        				return true;
+        			}
+    			}
+    			return false;
+			}
+
+			function set_background_color(name_of_color){
+			    myBody=document.getElementsByTagName("body")[0];
+			    myBody.style.background=name_of_color;
+			}
+
+			function check_guess() {
+			    if(!isInArray(guess_input, colors)){
+			    	alert("Sorry, I don't recognize your color.\n\n" +
+			            "Please try again.");
+			    	return false;
+			    }
+			    if (guess_input > target) {
+			        alert("Sorry, your guess is not correct!\n\n" +
+			            "Hint: your color is alphabetically higher than mine.\n\n" + 
+			            "Please try again.");
+			        return false;
+			    }
+			    if (guess_input < target) {
+			        alert("Sorry, your guess is not correct!\n\n" +
+			            "Hint: your color is alphabetically lower than mine.\n\n" + 
+			            "Please try again.");
+			        return false;
+			    }
+
+			    // the web page background color changes to the target color 
+			    set_background_color(target);
+
+			    alert("Congratulations! You have guessed the color!\n\n" + 
+			          "It took you " + guesses + " guesses to finish the game!\n\n" +
+			          "You can see the colour in the background.");
+				return true;			
+			}
+        </script>
+    </body>
+</html>
